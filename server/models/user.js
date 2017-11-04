@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const recordSchema = require('./record.js').Schema
+const { default: Record, Schema: RecordSchema } = require('./record.js')
 
 const SALTGEN = 10
 
@@ -23,8 +23,10 @@ const Schema = mongoose.Schema({
     type: String,
     required: true
   },
-  records: [recordSchema]
+  records: [RecordSchema]
 })
+
+const EDIT_FIELDS = ['date', 'distance', 'time']
 
 Schema.pre('save', function (next) {
   const user = this
@@ -50,6 +52,38 @@ Schema.methods.comparePassword = function (password, callback) {
     if (error) return callback(error)
     callback(null, matches)
   })
+}
+
+Schema.methods.findRecord = function (id) {
+  return this.records.id(id)
+}
+
+Schema.methods.addRecord = function (params, callback) {
+  const { date, distance, time } = params
+  const newRecord = new Record({
+    date, distance, time
+  })
+  const error = newRecord.validateSync()
+  if (error) {
+    callback(error, null)
+  } else {
+    this.records.push(newRecord)
+    callback(null, this)
+  }
+}
+
+Schema.methods.removeRecord = function (id, callback) {
+  this.records.pull(id)
+}
+
+Schema.methods.updateRecord = function (id, params, callback) {
+  const record = this.findRecord(id)
+  if (record) {
+    EDIT_FIELDS.forEach(field => params[field] && record.set(field, params[field]))
+    callback(null, this)
+  } else {
+    callback(new Error('Record not found'), null)
+  }
 }
 
 module.exports = {

@@ -17,6 +17,12 @@ const correctUser = {
   email: 'test@foo.bar'
 }
 
+const record = {
+  date: new Date(),
+  distance: 1000,
+  time: 600
+}
+
 beforeAll(() => User.remove({}))
 
 describe('User API', () => {
@@ -54,5 +60,13 @@ describe('Records API', () => {
     const response = await request(app).get('/records').set('Authorization', `BEARER ${token}`)
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual([])
+  })
+
+  test('It creates new record', async () => {
+    const response = await request(app)
+      .post('/records')
+      .send(record)
+      .set('Authorization', `BEARER ${token}`)
+    expect(response.statusCode).toBe(200)
   })
 })

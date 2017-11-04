@@ -5,7 +5,7 @@ router.get('/', function (req, res) {
   res.json(req.user.records)
 })
 
-router.post('/create', function (req, res) {
+router.post('/', function (req, res) {
   req.user.addRecord(req.body, (error, user) => {
     if (error) {
       res.status(400).json({

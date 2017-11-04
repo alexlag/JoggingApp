@@ -18,5 +18,6 @@ const Schema = mongoose.Schema({
 })
 
 module.exports = {
-  Schema
+  Schema,
+  default: mongoose.model('Record', Schema)
 }

@@ -1,3 +1,4 @@
+const mapValues = require('lodash/mapValues')
 const jwt = require('jsonwebtoken')
 
 const config = require('../config.js')
@@ -14,7 +15,11 @@ router.post('/signup', function (req, res) {
 
     newUser.save(error => {
       if (error) {
-        res.status(400).send({ error: true, message: 'Incorrect user parameters', data: error.errors })
+        res.status(400).send({
+          error: true,
+          message: 'Incorrect user parameters',
+          data: mapValues(error.errors, 'message')
+        })
       } else {
         res.json({ success: true, message: 'Account created successfully' })
       }
@@ -33,7 +38,7 @@ router.post('/signin', function (req, res) {
     } else {
       user.comparePassword(req.body.password, (error, matches) => {
         if (matches && !error) {
-          const token = jwt.sign({ user }, config.secret)
+          const token = jwt.sign({ id: user._id }, config.secret)
           res.json({ success: true, message: 'Token granted', token })
         } else {
           res.status(400).send({ error: true, message: 'Authentication failed. Wrong password.' })

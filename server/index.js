@@ -5,4 +5,4 @@ const api = require('./api/index.js')
 
 const server = http.Server(api)
 
-server.listen(port, '0.0.0.0', () => console.log(`BudgetManagerAPI running on ${port}`))
+server.listen(port, '0.0.0.0', () => console.log(`API running on ${port}`))

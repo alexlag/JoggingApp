@@ -1,7 +1,7 @@
 module.exports = (mongoose, config) => {
   const database = mongoose.connection
   mongoose.Promise = Promise
-  mongoose.connect(config.database, {
+  mongoose.connect(config.mongo, {
     useMongoClient: true,
     promiseLibrary: global.Promise
   })

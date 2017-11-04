@@ -24,5 +24,6 @@ require('../passport/index.js')(passport)
 app.use(passport.initialize())
 
 app.use('/users', require('./auth.js'))
+app.use('/records', passport.authenticate('jwt', { session: false }), require('./records.js'))
 
 module.exports = app

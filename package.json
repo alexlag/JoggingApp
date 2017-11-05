@@ -8,7 +8,8 @@
     "server:dev": "nodemon server/index.js",
     "test": "jest --forceExit",
     "client:dev": "poi client/index.js",
-    "client:build": "poi build client/index.js"
+    "client:build": "poi build client/index.js",
+    "start": "concurrently --kill-others \"npm run server:dev\" \"npm run client:dev\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^3.5.0",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^5.0.0",

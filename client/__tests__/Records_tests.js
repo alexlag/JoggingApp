@@ -27,4 +27,10 @@ describe('Record Model', () => {
 
     expect(r.averageSpeed.toFixed(2).toString()).toBe('8.18')
   })
+
+  test('shows time correctly', () => {
+    expect(new Record({ time: 3600 }).timeString).toBe('01:00:00')
+    expect(new Record({ time: 3742 }).timeString).toBe('01:02:22')
+    expect(new Record({ time: 61 }).timeString).toBe('00:01:01')
+  })
 })

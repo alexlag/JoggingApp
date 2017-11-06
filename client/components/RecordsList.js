@@ -21,7 +21,7 @@ const RecordsList = ({ records }) =>
           <Table.Row key={r._id}>
             <Table.Cell>{r.dateString}</Table.Cell>
             <Table.Cell>{r.distance}</Table.Cell>
-            <Table.Cell>{r.time}</Table.Cell>
+            <Table.Cell>{r.timeString}</Table.Cell>
             <Table.Cell>{r.averageSpeed.toFixed(2)}</Table.Cell>
             <Table.Cell><Icon name='edit' /></Table.Cell>
             <Table.Cell><Icon name='trash' color='red' /></Table.Cell>

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Table, Icon } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 import * as recordsActions from '../ducks/records'
-
 import RecordsList from './RecordsList'
+import AddRecord from './AddRecord'
 
 class RecordsPage extends React.Component {
   static propTypes = {
@@ -21,9 +21,16 @@ class RecordsPage extends React.Component {
     const { records } = this.props
 
     return (
-      <div>
-        <RecordsList records={records} />
-      </div>
+      <Grid divided='vertically'>
+        <Grid.Row columns={2}>
+          <Grid.Column width={12}>
+            <RecordsList records={records} />
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <AddRecord />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

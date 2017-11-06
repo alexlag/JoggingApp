@@ -11,6 +11,7 @@ class RecordsPage extends React.Component {
   static propTypes = {
     records: PropTypes.array.isRequired,
     fetchRecords: PropTypes.func.isRequired,
+    addRecord: PropTypes.func.isRequired,
     deleteRecord: PropTypes.func.isRequired
   }
 
@@ -19,7 +20,7 @@ class RecordsPage extends React.Component {
   }
 
   render () {
-    const { records, deleteRecord } = this.props
+    const { records, deleteRecord, addRecord } = this.props
 
     return (
       <Grid divided='vertically'>
@@ -28,7 +29,7 @@ class RecordsPage extends React.Component {
             <RecordsList records={records} onDelete={deleteRecord} />
           </Grid.Column>
           <Grid.Column width={4}>
-            <AddRecord />
+            <AddRecord onAdd={addRecord} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

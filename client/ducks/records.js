@@ -11,6 +11,14 @@ export function fetchRecords () {
   }
 }
 
+export function addRecord (params) {
+  return dispatch => {
+    Records.add(params)
+      .then(fetchRecords)
+      .then(dispatch)
+  }
+}
+
 export function deleteRecord (id) {
   return dispatch => {
     Records.del(id)
@@ -28,7 +36,7 @@ const initial = []
 export default (state = initial, { type, payload }) => {
   switch (type) {
     case SET_RECORDS:
-      return payload.map(params => new Record(params))
+      return payload.map(params => new Record(params)).sort((a, b) => a.date - b.date)
     default:
       return state
   }

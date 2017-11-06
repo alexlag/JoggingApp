@@ -1,17 +1,7 @@
+import { padInt, secondsToString } from './utils'
+
 // m/s to km/hr
 const CONVERT_COEF = 3600 / 1000
-
-function padInt (num) {
-  return `${num}`.padStart(2, '0')
-}
-
-function secondsToString (num) {
-  const seconds = num % 60
-  const minutes = ((num - seconds) / 60) % 60
-  const hours = Math.floor(num / 3600)
-
-  return [hours, minutes, seconds].map(padInt).join(':')
-}
 
 export default class Record {
   constructor ({ _id, date, distance, time }) {

@@ -22,7 +22,7 @@ class RecordsList extends React.PureComponent {
 
   handleDelteConfirm = id => () => {
     this.props.onDelete(id)
-    this.setState({ deleteConfirmation: false })
+    this.handleDeleteCancel()
   }
 
   handleDeleteCancel = () => {

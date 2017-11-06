@@ -11,6 +11,12 @@
     "client:build": "poi build client/index.js",
     "start": "concurrently --kill-others \"npm run server:dev\" \"npm run client:dev\""
   },
+  "nodemonConfig": {
+    "ignore": [
+      "client/*",
+      "dist/*"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:alexlag/JoggingApp.git"
@@ -55,6 +61,14 @@
     "passport-jwt": "^3.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.76.0",
+    "store": "^2.0.12",
+    "styled-components": "^2.2.3"
   }
 }

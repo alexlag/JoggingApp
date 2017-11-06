@@ -25,7 +25,7 @@ function ViewSelection ({ page, goToRecords, goToReports }) {
 }
 
 ViewSelection.propTypes = {
-  page: PropTypes.number.isRequired,
+  page: PropTypes.string.isRequired,
   goToRecords: PropTypes.func.isRequired,
   goToReports: PropTypes.func.isRequired
 }

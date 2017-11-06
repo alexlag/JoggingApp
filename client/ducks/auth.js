@@ -11,3 +11,12 @@ export function signin (email, password) {
 export function signout () {
   return fullClearToken()
 }
+
+export function signup (params) {
+  return dispatch => API.signup(params)
+    .then(() => {
+      const { email, password } = params
+
+      dispatch(signin(email, password))
+    })
+}

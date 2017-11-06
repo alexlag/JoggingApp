@@ -26,3 +26,9 @@ export function signin (email, password) {
       return data
     })
 }
+
+export function signup (params) {
+  return request
+    .post('/api/users/signup')
+    .send(params)
+}

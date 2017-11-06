@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import { signup } from '../ducks/auth'
+
 import Signup from './Signup'
 
 const Wrapper = styled.div`
@@ -10,21 +12,26 @@ const Wrapper = styled.div`
   overflow: auto;
 `
 
-const Workspace = ({ hasToken }) =>
+const Workspace = ({ hasToken, signup }) =>
   <Wrapper>
     {
       hasToken
         ? null
-        : <Signup />
+        : <Signup onSubmit={signup} />
     }
   </Wrapper>
 
 Workspace.propTypes = {
-  hasToken: PropTypes.bool.isRequired
+  hasToken: PropTypes.bool.isRequired,
+  signup: PropTypes.func.isRequired
 }
 
 function mapState ({ token }) {
   return { hasToken: !!token }
 }
 
-export default connect(mapState)(Workspace)
+const mapDispatch = {
+  signup
+}
+
+export default connect(mapState, mapDispatch)(Workspace)

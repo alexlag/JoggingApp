@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { signup } from '../ducks/auth'
 
 import Signup from './Signup'
+import ViewSelection from './ViewSelection'
 
 const Wrapper = styled.div`
   padding-top: 7em;
@@ -16,7 +17,7 @@ const Workspace = ({ hasToken, signup }) =>
   <Wrapper>
     {
       hasToken
-        ? null
+        ? <ViewSelection />
         : <Signup onSubmit={signup} />
     }
   </Wrapper>

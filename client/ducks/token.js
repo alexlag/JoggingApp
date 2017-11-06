@@ -1,17 +1,17 @@
-import * as Auth from '../api/auth'
+import * as Storage from '../api/localStorage'
 
 const SET_JWT_TOKEN = '@App/SET_JWT_TOKEN'
 const CLEAR_JWT_TOKEN = '@App/CLEAR_JWT_TOKEN'
 
 export function initToken () {
   return dispatch => {
-    dispatch(setToken(Auth.getToken()))
+    dispatch(setToken(Storage.getToken()))
   }
 }
 
 export function fullClearToken () {
   return dispatch => {
-    Auth.clearToken()
+    Storage.clearToken()
     dispatch(clearToken())
   }
 }

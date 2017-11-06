@@ -1,10 +1,10 @@
-import * as API from '../api/auth'
+import * as Users from '../api/users'
 
 import { setToken, fullClearToken } from './token'
 
 export function signin (email, password) {
   return dispatch =>
-    API.signin(email, password)
+    Users.signin(email, password)
       .then(result => dispatch(setToken(result.token)))
 }
 
@@ -13,7 +13,7 @@ export function signout () {
 }
 
 export function signup (params) {
-  return dispatch => API.signup(params)
+  return dispatch => Users.signup(params)
     .then(() => {
       const { email, password } = params
 

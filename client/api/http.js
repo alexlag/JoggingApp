@@ -18,3 +18,10 @@ export function apiPost (url, body) {
     .send(body)
     .then(response => response.body)
 }
+
+export function apiDelete (url) {
+  return request
+    .del(BASE_URL + url)
+    .set('Authorization', `BEARER ${getToken()}`)
+    .then(response => response.body)
+}

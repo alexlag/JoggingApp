@@ -11,6 +11,14 @@ export function fetchRecords () {
   }
 }
 
+export function deleteRecord (id) {
+  return dispatch => {
+    Records.del(id)
+      .then(fetchRecords)
+      .then(dispatch)
+  }
+}
+
 export function setRecords (payload) {
   return { type: SET_RECORDS, payload }
 }

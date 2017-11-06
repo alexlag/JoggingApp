@@ -10,7 +10,8 @@ import AddRecord from './AddRecord'
 class RecordsPage extends React.Component {
   static propTypes = {
     records: PropTypes.array.isRequired,
-    fetchRecords: PropTypes.func.isRequired
+    fetchRecords: PropTypes.func.isRequired,
+    deleteRecord: PropTypes.func.isRequired
   }
 
   componentDidMount () {
@@ -18,13 +19,13 @@ class RecordsPage extends React.Component {
   }
 
   render () {
-    const { records } = this.props
+    const { records, deleteRecord } = this.props
 
     return (
       <Grid divided='vertically'>
         <Grid.Row columns={2}>
           <Grid.Column width={12}>
-            <RecordsList records={records} />
+            <RecordsList records={records} onDelete={deleteRecord} />
           </Grid.Column>
           <Grid.Column width={4}>
             <AddRecord />

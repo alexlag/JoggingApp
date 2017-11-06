@@ -5,9 +5,12 @@ import { Menu } from 'semantic-ui-react'
 
 import * as pageActions from '../ducks/page'
 
+import RecordsPage from './RecordsPage'
+
 function Page ({ page }) {
   switch (page) {
     case 'records':
+      return <RecordsPage />
     case 'reports':
     default:
       return null

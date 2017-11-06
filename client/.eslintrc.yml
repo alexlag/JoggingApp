@@ -6,8 +6,10 @@ parserOptions:
   sourceType: module
 env:
   browser: true
+  jest/globals: true
 extends:
   - standard
   - standard-react
 plugins:
   - html
+  - jest

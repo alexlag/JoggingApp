@@ -21,7 +21,7 @@ export default class Record {
 
   get dateString () {
     const d = this.date
-    return `${padInt(d.getDate())}.${padInt(d.getMonth() + 1)}.${d.getFullYear()}`
+    return `${padInt(d.getDate())}/${padInt(d.getMonth() + 1)}/${d.getFullYear()}`
   }
 
   get timeString () {

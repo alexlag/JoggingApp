@@ -19,6 +19,14 @@ export function apiPost (url, body) {
     .then(response => response.body)
 }
 
+export function apiPut (url, body) {
+  return request
+    .put(BASE_URL + url)
+    .set('Authorization', `BEARER ${getToken()}`)
+    .send(body)
+    .then(response => response.body)
+}
+
 export function apiDelete (url) {
   return request
     .del(BASE_URL + url)

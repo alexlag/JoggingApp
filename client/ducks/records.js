@@ -19,6 +19,14 @@ export function addRecord (params) {
   }
 }
 
+export function editRecord (id, params) {
+  return dispatch => {
+    Records.edit(id, params)
+      .then(fetchRecords)
+      .then(dispatch)
+  }
+}
+
 export function deleteRecord (id) {
   return dispatch => {
     Records.del(id)

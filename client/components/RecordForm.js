@@ -2,19 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'semantic-ui-react'
 
-import { stringToSeconds } from '../models/utils'
+import { padInt, stringToSeconds, secondsToString } from '../models/utils'
 
 function extractStateFromProps ({ date, distance, time }) {
   return {
-    date: date || new Date(),
-    distance: distance || 0,
-    time: time || ''
+    date: `${date.getFullYear()}-${padInt(date.getMonth() + 1)}-${padInt(date.getDate())}`,
+    distance,
+    time: secondsToString(time)
   }
 }
 
 class RecordForm extends React.PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    date: new Date(),
+    distance: 0,
+    time: 0
   }
 
   constructor (props) {

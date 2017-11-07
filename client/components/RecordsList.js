@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Button, Icon, Confirm } from 'semantic-ui-react'
+import { Table, Modal, Button, Icon, Confirm } from 'semantic-ui-react'
+
+import RecordForm from './RecordForm'
 
 class RecordsList extends React.PureComponent {
   static propTypes = {
     records: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -14,6 +17,8 @@ class RecordsList extends React.PureComponent {
     this.state = {
       deleteConfirmation: false
     }
+
+    this.form = {}
   }
 
   handleDeleteOpen = () => {
@@ -28,6 +33,44 @@ class RecordsList extends React.PureComponent {
   handleDeleteCancel = () => {
     this.setState({ deleteConfirmation: false })
   }
+
+  handleEditOpen = id => () => this.setState({ [id]: true })
+
+  handleEditClose = id => () => this.setState({ [id]: false })
+
+  handleEditSubmit = id => () => {
+    try {
+      this.props.onEdit(id, this.form[id].getData())
+
+      this.setState({ [id]: false })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  editModal = ({ _id: id, date, distance, time }) =>
+    <Modal
+      size='tiny'
+      trigger={<Button icon onClick={this.handleEditOpen(id)}><Icon name='edit' /></Button>}
+      open={this.state[id]}
+      onClose={this.handleEditClose(id)}
+    >
+      <Modal.Header>Edit Record</Modal.Header>
+      <Modal.Content>
+        <RecordForm
+          date={date}
+          distance={distance}
+          time={time}
+          ref={ref => { this.form[id] = ref }}
+          onSubmit={this.handleEditSubmit(id)}
+        />
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='green' onClick={this.handleEditSubmit(id)}>
+          Edit
+        </Button>
+      </Modal.Actions>
+    </Modal>
 
   render () {
     const { records } = this.props
@@ -54,9 +97,7 @@ class RecordsList extends React.PureComponent {
                 <Table.Cell>{r.timeString}</Table.Cell>
                 <Table.Cell>{r.averageSpeed.toFixed(2)}</Table.Cell>
                 <Table.Cell>
-                  <Button icon>
-                    <Icon name='edit' />
-                  </Button>
+                  {this.editModal(r)}
                 </Table.Cell>
                 <Table.Cell>
                   <Button icon color='red' onClick={this.handleDeleteOpen} >

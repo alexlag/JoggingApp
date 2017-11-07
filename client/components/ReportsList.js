@@ -11,7 +11,7 @@ class ReportsList extends React.PureComponent {
     const { stats } = this.props
 
     return (
-      <Table celled>
+      <Table celled compact textAlign='center'>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Week</Table.HeaderCell>

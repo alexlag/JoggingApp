@@ -82,7 +82,7 @@ class RecordsList extends React.PureComponent {
       : sort === -1 ? 'ascending' : null
 
     return (
-      <Table celled sortable>
+      <Table celled sortable compact textAlign='center'>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell

@@ -10,6 +10,7 @@ services:
     command: yarn run server
     environment:
       PORT: 3000
+      SECRET: AnotherSecretString
       MONGO_URL: mongodb://mongo:27017/jogging
     links:
       - mongo

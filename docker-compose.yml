@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+
+  api:
+    build: .
+    command: yarn run server
+    environment:
+      PORT: 3000
+      MONGO_URL: mongodb://mongo:27017/jogging
+    links:
+      - mongo
+    volumes:
+      - /app/dist
+    restart: always
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    links:
+      - api
+    volumes_from:
+      - api:ro

@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import { Form } from 'semantic-ui-react'
 
-import { padInt, stringToSeconds, secondsToString } from '../models/utils'
+import { stringToSeconds, secondsToString } from '../models/utils'
 
 function extractStateFromProps ({ date, distance, time }) {
   return {
-    date: `${date.getFullYear()}-${padInt(date.getMonth() + 1)}-${padInt(date.getDate())}`,
+    // default HTML5 date input format
+    date: moment(date).format('YYYY-MM-DD'),
     distance,
     time: secondsToString(time)
   }

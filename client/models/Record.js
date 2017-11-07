@@ -1,4 +1,5 @@
-import { padInt, secondsToString } from './utils'
+import { secondsToString } from './utils'
+import moment from 'moment'
 
 // m/s to km/hr
 const CONVERT_COEF = 3600 / 1000
@@ -20,8 +21,7 @@ export default class Record {
   }
 
   get dateString () {
-    const d = this.date
-    return `${padInt(d.getDate())}/${padInt(d.getMonth() + 1)}/${d.getFullYear()}`
+    return moment(this.date).format('DD/MM/YYYY')
   }
 
   get timeString () {

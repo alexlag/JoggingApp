@@ -7,6 +7,8 @@ import RecordForm from './RecordForm'
 class RecordsList extends React.PureComponent {
   static propTypes = {
     records: PropTypes.array.isRequired,
+    sort: PropTypes.number.isRequired,
+    onToggle: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired
   }
@@ -73,13 +75,22 @@ class RecordsList extends React.PureComponent {
     </Modal>
 
   render () {
-    const { records } = this.props
+    const { records, sort, onToggle } = this.props
+
+    const sorted = sort === 1
+      ? 'descending'
+      : sort === -1 ? 'ascending' : null
 
     return (
-      <Table celled>
+      <Table celled sortable>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Date</Table.HeaderCell>
+            <Table.HeaderCell
+              sorted={sorted}
+              onClick={onToggle}
+            >
+              Date
+            </Table.HeaderCell>
             <Table.HeaderCell>Distance (Metres)</Table.HeaderCell>
             <Table.HeaderCell>Time</Table.HeaderCell>
             <Table.HeaderCell>Average Speed (Km/Hr)</Table.HeaderCell>

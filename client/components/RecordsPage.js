@@ -10,6 +10,8 @@ import AddRecord from './AddRecord'
 class RecordsPage extends React.Component {
   static propTypes = {
     records: PropTypes.array.isRequired,
+    sort: PropTypes.number.isRequired,
+    toggleSort: PropTypes.func.isRequired,
     fetchRecords: PropTypes.func.isRequired,
     addRecord: PropTypes.func.isRequired,
     editRecord: PropTypes.func.isRequired,
@@ -21,13 +23,19 @@ class RecordsPage extends React.Component {
   }
 
   render () {
-    const { records, deleteRecord, addRecord, editRecord } = this.props
+    const { records, sort, deleteRecord, addRecord, editRecord, toggleSort } = this.props
 
     return (
       <Grid divided='vertically'>
         <Grid.Row columns={2}>
           <Grid.Column width={12}>
-            <RecordsList records={records} onDelete={deleteRecord} onEdit={editRecord} />
+            <RecordsList
+              records={records}
+              sort={sort}
+              onDelete={deleteRecord}
+              onEdit={editRecord}
+              onToggle={toggleSort}
+            />
           </Grid.Column>
           <Grid.Column width={4}>
             <AddRecord onAdd={addRecord} />
@@ -39,7 +47,12 @@ class RecordsPage extends React.Component {
 }
 
 function mapState ({ records }) {
-  return { records }
+  const { all, sort } = records
+
+  return {
+    sort,
+    records: all.sort((a, b) => sort * (a.date - b.date))
+  }
 }
 
 const mapDispatch = recordsActions

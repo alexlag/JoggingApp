@@ -28,7 +28,7 @@ class ReportsPage extends React.PureComponent {
 }
 
 function mapState ({ records }) {
-  return { stats: statsByWeek(records) }
+  return { stats: statsByWeek(records.all) }
 }
 
 export default connect(mapState)(ReportsPage)

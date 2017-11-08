@@ -5,17 +5,25 @@ import { secondsToString } from './utils'
 // m/s to km/hr
 const CONVERT_COEF = 3600 / 1000
 
+function calculateSpeed (distance, time) {
+  if (time === 0) {
+    return 0.0
+  }
+
+  return CONVERT_COEF * (distance / time)
+}
+
 function average (arr) {
   if (arr.length === 0) {
     return { distance: 0.0, speed: 0.0 }
   }
 
-  const [ distance, speed ] = arr.reduce(
-    ([dist, sp], record) => [dist + record.distance, sp + record.averageSpeed],
+  const [ distance, time ] = arr.reduce(
+    ([dist, time], record) => [dist + record.distance, time + record.time],
     [0.0, 0.0]
-  ).map(x => x / arr.length)
+  )
 
-  return { distance, speed }
+  return { distance: distance / arr.length, speed: calculateSpeed(distance, time) }
 }
 
 export function statsByWeek (records) {
@@ -50,11 +58,7 @@ export default class Record {
   }
 
   get averageSpeed () {
-    if (this.time === 0) {
-      return 0.0
-    }
-
-    return CONVERT_COEF * (this.distance / this.time)
+    return calculateSpeed(this.distance, this.time)
   }
 
   get dateString () {
